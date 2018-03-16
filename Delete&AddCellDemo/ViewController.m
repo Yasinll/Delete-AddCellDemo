@@ -112,6 +112,22 @@ static NSString *cellIdentifier = @"cellIdentifier";
         return YES;
     }
 }
+//cell可移动
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    //当前编辑行不可移动
+    if (indexPath.row == _arrayM.count) {
+        return NO;
+    }
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    NSString *stringToMove = _arrayM[sourceIndexPath.row];
+    
+    [_arrayM removeObjectAtIndex:sourceIndexPath.row];
+    [_arrayM insertObject:stringToMove atIndex:destinationIndexPath.row];
+}
 
 //关闭键盘
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
